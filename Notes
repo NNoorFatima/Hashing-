@@ -1,0 +1,90 @@
+	→ For storing and retrieving data from database in constant time
+	→ Mapping technique
+	→ Larger values mapped onto larger
+	→ Hash table is a database that allows storage of data 
+	→ Using hash function we don’t need to scan like in array and are able to store in constant time
+
+Hash Function Methods
+	→ K mod 10
+		v Here k is the unique value of database
+	→ K mod n
+	→ Division method
+	→ Multiplication mehtod
+	→ Mid square
+		v Ex when value is 123 then store at 2^2 ie 4
+	→ folding method 
+		v Suppose data is 123456
+		v Suppose table is between 0-999
+		v So fold  and add 123+456 and store answer in table
+	→ At times when using any of the above methods the index generated might already have a value this would lead to COLLISION
+
+
+How to deal with collision (techniques of collision resolution)
+	→ Chaining/ open hashing 
+		v Insert == O(1); Search== O(n); Delete==O(n)
+		v Make external chains
+		v Insertion of linked list happens at head INSERTATHEAD
+		v In case there is already a value at the index then create a linked list and chain to that index
+		v 0	12
+		1	23
+		2	3
+		3	11
+		v Now suppose you have to insert 40 at index 1
+	→ Open addressing/closed hashing 
+		v Utilizing the space initially provided
+		v 0	12
+		1	23
+		2	
+		3	11
+		v If value 40 is to be inserted at index 1 then as it is already filled so in case of LINEAR PROBING just check the next index in the given space till last index is reached 
+		v In this case 40 is inserted at index 2
+		v Insert== ;Search==O(n) ;Deletion
+		v Index= index % hashtablesize 
+		v Index= (index+1) % hashtablesize 
+		v Index= (index+2) % hashtablesize …
+		v In case of QUADRACTIC PROBING h+I2 mod n here h is the hash value.
+		v Suppose hash value is 0 then 0+12 if this index is also filled then 0+22 and so on
+		v Double hashing is when two hash functions are used on is for inserting and other is for inserting in case of collision
+
+
+	→ Rules of Hashing 
+		v The hash value is fully determined by the data being hashed
+		v The hash function uses all input data
+		v The hash function unfirmly distributes the data across the entire set of possible hash values
+		v The hash function generates very different hash value for similar things
+		
+	→ Methods to create hash function (Open hashing)
+		v Multiplication method
+			§ Multiply the key by a constant A that is between 0 and 1
+			§ Extract the fractional part of kA
+			§ Multiply the fractional part by m(which is the hash table size)
+			§ Eg 
+				□ If key=6 A=0.3 m=32
+				□ K x A= 6 x 0.3=1.8
+				□ Extract factional part ie 0.8 
+				□ M x 0.8 ie 32 x 0.8=25.6
+				□ Thus ==>   h(6)=25
+		v Division method
+			§ Key must be transformed into an integer value
+			§ The value must be telescoped into range 0 to m-1
+			§ This method includes the above mention modulus methods
+			§ However problem with this is the certain values of are bad because they can lead to collision 
+				□ Power of 2
+				□ Non-prime numbers
+				□ Power of 10
+			§ It is best to make value of hash function dependent of all values of the key 
+			
+	→ Linear probing can lead to the formation of clusters in case they all have the same head value then they will be placed in continuous memory
+	→ This is called as primary clustering 
+	→ They further merger with other clusters and form bigger clusters
+	→ Quadratic probing leads to the formation of mild cluster or secondary clustering 
+	→ Clustering can be improved by moving the hash function to cubic but this increases the cost 
+	
+
+Primary clustering the increase in probability of element to be stored in a particular index  ; increase search time as the whole cluster must be searched for the value
+Secondary clustering when two or more elements are competing for same probe sequence
+
+Load factor=number of elements presernt in hash table/ total size of hash table 
+
+
+
